@@ -1,15 +1,16 @@
 const {createServer} = require("./src/server/server");
 
 const {
-    MONGO_USER = "repoteam4",
-    MONGO_PASSWORD = "repoteam4",
+    MONGO_USER = "Vipse1323",
+    MONGO_PASSWORD = "repoteam1234",
     MONGO_LOCAL = "false",
-    MONGO_DATABSE = "repoteam4",
-    MONGO_HOST = "ds157538.mlab.com",
-    MONGO_PORT = 57538,
+    MONGO_DATABSE = "yandexvipse",
+    MONGO_HOST = "ds119090.mlab.com",
+    MONGO_PORT = 19090,
     // SERVER_HOST = "localhost",
     // SERVER_PORT = 3001
 } = process.env;
+
 
 /**
  * Setup mongo configuration

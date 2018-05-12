@@ -5,6 +5,7 @@ import ChatTitle from "../ChatTitle/ChatTitle";
 import {connect} from "react-redux";
 import { changeLayout} from "../../reducers/navigation/action";
 import PropTypes from "prop-types";
+import api from "../../api";
 
 
 
@@ -18,6 +19,7 @@ class Header extends React.Component {
 
     clickGoBackButtonHandler() {
         this.props.changeLayout("chatListLayout");
+        api.unMessage();
     }
 
     clickRightButtonHandler() {

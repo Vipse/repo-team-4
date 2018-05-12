@@ -15,20 +15,28 @@ export default function reducer(state = initialState, action) {
     case "JOIN_CHAT": {
         return {
             ...state,
-            currentChatId: action.id
+            currentChatId: action.id,
+            loading: true
         };
     }
     case "GET_ROOMS_SUCCESS": {
+
         return {
             ...state,
             rooms: action.rooms,
-            loading: false,
+            loading: false
         };
     }
     case "GET_ROOMS": {
         return {
             ...state,
-            loading: true,
+            loading: true
+        };
+    }
+    case "BACK_TO_CHAT": {
+        return {
+            ...state,
+            loading: true
         };
     }
     case "GET_ROOMS_FAIL": {
@@ -42,7 +50,7 @@ export default function reducer(state = initialState, action) {
         return {
             ...state,
             roomUsers: [],
-            loading: true,
+            loading: true
         };
     }
 
@@ -50,7 +58,7 @@ export default function reducer(state = initialState, action) {
         return {
             ...state,
             roomUsers: state.roomUsers.concat(action.roomUsers),
-            loading: false,
+            loading: false
         };
     }
 
@@ -58,7 +66,7 @@ export default function reducer(state = initialState, action) {
         console.log("Ошибка получения пользователей чата");
         return {
             ...state,
-            loading: false,
+            loading: false
         };
     }
 
@@ -66,7 +74,7 @@ export default function reducer(state = initialState, action) {
         return {
             ...state,
             users: action.users,
-            loading: false,
+            loading: false
         };
     }
     case "GET_CONTACTS": {
@@ -86,6 +94,7 @@ export default function reducer(state = initialState, action) {
         return {
             ...state,
             messages: action.messages,
+            loading: false
         };
     }
     case "GET_MESSAGES": {
@@ -94,7 +103,6 @@ export default function reducer(state = initialState, action) {
         };
     }
     case "GET_MESSAGES_FAIL": {
-        console.log("Ошибка загрузки чатов");
         return {
             ...state,
         };

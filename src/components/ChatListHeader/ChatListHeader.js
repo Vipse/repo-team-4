@@ -5,10 +5,12 @@ import "../ChatTitle/ChatName/ChatName";
 import {connect} from "react-redux";
 import {changeLayout} from "../../reducers/navigation/action";
 
+
 class ChatListHeader extends React.Component {
 
     clickLeftButtonHandler() {
         this.props.changeLayout("profile");
+
     }
 
     clickRightButtonHandler() {

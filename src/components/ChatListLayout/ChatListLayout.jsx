@@ -34,4 +34,4 @@ export default connect(
         changeLayout,
         getCurrentUserInfo
     }
-)(ChatListLayout)
+)(ChatListLayout);

@@ -7,6 +7,7 @@ import {loginButtonHandler} from "../../reducers/authorization/action";
 
 import PropTypes from "prop-types";
 import api from "../../api";
+import Spinner from "../Loaders/Spinner/Spinner";
 
 class LoginLayout extends React.Component {
     constructor(props) {
@@ -21,11 +22,14 @@ class LoginLayout extends React.Component {
     }
 
     onLoginClick() {
-        api.getUsers({limit: 20}).then((user) => console.log(user));
         this.props.loginButtonHandler(document.getElementById("login").value);
     }
 
     render() {
+
+        if(this.props.loading) {
+            return(<Spinner/>);
+        }
         return (
             <div className='loginPage'>
                 <div className='loginContainer'>
@@ -48,11 +52,13 @@ LoginLayout.propTypes = {
     changeLayout: PropTypes.func,
     authorization: PropTypes.func,
     loginButtonHandler: PropTypes.func,
+    loading: PropTypes.bool
 };
 
 export default connect(
     state => ({
-        layout: state.navigation.layout
+        layout: state.navigation.layout,
+        loading: state.authorization.loading
     }), {
         changeLayout,
         authorization,

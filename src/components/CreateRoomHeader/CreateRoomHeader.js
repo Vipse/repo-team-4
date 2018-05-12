@@ -11,9 +11,7 @@ class CreateRoomHeader extends React.Component {
         this.props.changeLayout("chatListLayout");
     }
 
-    onCreateClick(){
-        this.props.createRoom(this.input.value, this.props.pickedUsers);
-    }
+
 
     render() {
 
@@ -23,8 +21,8 @@ class CreateRoomHeader extends React.Component {
                     <i className='fa fa-arrow-left'></i>
                 </div>
                 <h2>Создать чат</h2>
-                <div className="button button-2" onClick={this.onCreateClick.bind(this)}>
-                    <i className='fa fa-plus'></i>
+                <div className="button button-2">
+                    <i className='fa'></i>
                 </div>
             </div>
         );

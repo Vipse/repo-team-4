@@ -252,8 +252,10 @@ class Api {
      */
     async onMessage(callback) {
         await this._connectPromise;
-
         this.io.on(MESSAGES.MESSAGE, callback);
+    }
+    async unMessage(callback) {
+        this.io.off(MESSAGES.MESSAGE, callback);
     }
 }
 

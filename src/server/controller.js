@@ -23,10 +23,10 @@ module.exports = function (db, io) {
     /**
      * Connection is created
      */
+
     io.on("connection", function (socket) {
         let {sid} = socket.request.cookies,
             isDisconnected = false;
-
         socket.join("broadcast");
 
         /**
@@ -127,9 +127,8 @@ module.exports = function (db, io) {
 
         // Receive current user information
         requestResponse(TYPES.CURRENT_USER, () => {
-            console.log("current user");
-            return userPromise;
 
+            return userPromise;
         });
 
         // Return list of all users with
@@ -145,13 +144,11 @@ module.exports = function (db, io) {
 
         requestResponse(TYPES.CHECK_AUTH, async () => {
             let {sid} = socket.request.cookies;
-            console.log("sid from controller.js", sid);
             return await getUserBySid(db, sid);
         });
 
         // Create room
         requestResponse(TYPES.CREATE_ROOM, async (params) => {
-            console.log("create room");
             let currentUser = await userPromise;
 
             return createRoom(db, currentUser, params);
@@ -164,7 +161,6 @@ module.exports = function (db, io) {
 
         // Rooms of current user
         requestResponse(TYPES.CURRENT_USER_ROOMS, async (params) => {
-            console.log("current user rooms");
             let currentUser = await userPromise;
 
             return getUserRooms(db, currentUser._id, params);
@@ -172,7 +168,6 @@ module.exports = function (db, io) {
 
         // Join current user to room
         requestResponse(TYPES.CURRENT_USER_JOIN_ROOM, async ({roomId}) => {
-            console.log("current user join room");
             let currentUser = await userPromise;
 
             let payload = {
@@ -197,7 +192,7 @@ module.exports = function (db, io) {
         // Leave current user to room
         requestResponse(TYPES.CURRENT_USER_LEAVE_ROOM, async ({roomId}) => {
             let currentUser = await userPromise;
-            console.log("current user leave room");
+
             let payload = {
                 roomId,
                 userId: currentUser._id
@@ -212,7 +207,6 @@ module.exports = function (db, io) {
         // Send message
         requestResponse(TYPES.SEND_MESSAGE, async (payload) => {
             let currentUser = await userPromise;
-            console.log("send message");
             let message = await sendMessage(db, {
                 ...payload,
                 userId: currentUser._id
@@ -225,7 +219,7 @@ module.exports = function (db, io) {
 
         // Send message
         requestResponse(TYPES.MESSAGES, (payload) => getMessages(db, payload));
-        console.log("messages");
+
         userPromise.then(async (user) => {
             if (!isDisconnected) {
                 ONLINE[user._id] = true;
@@ -243,7 +237,6 @@ module.exports = function (db, io) {
 
         socket.on("disconnect", async () => {
             isDisconnected = true;
-            console.log("disconnect socket");
             let user = await userPromise;
 
             ONLINE[user._id] = false;

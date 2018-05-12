@@ -8,6 +8,7 @@ import Spinner from "../Loaders/Spinner/Spinner";
 class ChatList extends React.Component {
 
     componentDidMount() {
+
         this.props.getRooms();
     }
 
@@ -15,7 +16,7 @@ class ChatList extends React.Component {
         if (this.props.loading) {
             return (
                 <Spinner/>
-            )
+            );
         }
 
         return (
@@ -35,10 +36,11 @@ class ChatList extends React.Component {
     }
 }
 
-export default connect(state => ({
+export default connect(
+    state => ({
         rooms: state.chat.rooms,
         loading: state.chat.loading,
     }), {
         getRooms
     }
-)(ChatList)
+)(ChatList);

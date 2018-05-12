@@ -1,9 +1,7 @@
 import api from "../../api";
 
-//TODO При создании часа с контактом создать на его стороне тоже
 export function joinChat(userId, currentUser) {
     return (dispatch) => {
-        // api.getUsers({limit:20}).then((user)=>console.log(user));
         api.getUser(userId)
             .then((user) => {
 
@@ -64,13 +62,20 @@ export function joinExistingChat(roomId) {
 
     };
 }
+export function backToChat() {
+    return (dispatch) => {
+        dispatch({
+            type: "BACK_TO_CHAT"
+        });
+    };
+}
 
 export function getRooms() {
     return (dispatch) => {
         dispatch({type: "GET_ROOMS"});
+
         api.getCurrentUserRooms()
             .then((rooms) => {
-
                 Promise.all(rooms.items.map(setLastMessageToRoom)).then(() => {
                     rooms.items.sort(compareRooms);
                     dispatch({
@@ -81,13 +86,12 @@ export function getRooms() {
                     dispatch({type: "GET_ROOMS_FAIL"});
                 });
 
-            });
-
+            })
+            .catch((error) => console.log(error, "error from action chat"));
     };
 }
 
 export function getRoomMessages(roomId) {
-    console.log("getroom messages run here");
     return (dispatch) => {
         dispatch({type: "GET_MESSAGES"});
         api.getRoomMessages(roomId)
@@ -205,7 +209,6 @@ export function pickUser(usersArr, userId) {
 }
 
 function setLastMessageToRoom(room) {
-    console.log("123");
     return new Promise(function (resolve) {
         api.getRoomMessages(room._id).then((messages) => {
             room.lastMessage = messages.items[0];
