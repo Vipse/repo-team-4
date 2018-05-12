@@ -2,7 +2,7 @@
   "name": "shri-boilerplate",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3001/",
+  "proxy": "https://localhost:3001/",
   "dependencies": {
     "babel-eslint": "^8.2.3",
     "concurrently": "^3.5.1",
